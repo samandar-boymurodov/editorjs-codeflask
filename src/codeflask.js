@@ -98,7 +98,7 @@
      // let x = (x === undefined) ? your_default_value : x;
      this.data = {}
      this.data.code = (data.code === undefined) ? '// Hello World' : data.code;
-     this.data.language = (data.language === undefined) ? 'plain' : data.language;
+     this.data.language = (data.language === undefined) ? 'javascript' : data.language;
      this.data.showlinenumbers = (data.showlinenumbers === undefined) ? true : data.showlinenumbers;
      this.data.editorInstance = {}
 
