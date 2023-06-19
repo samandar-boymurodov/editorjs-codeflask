@@ -41,7 +41,7 @@
 
   import NiceSelect from "nice-select2/dist/js/nice-select2";
   import NiceSelectStyle from "nice-select2/dist/css/nice-select2.css";
-  import { EXCLUDED_LANGUAGES } from "./vars";
+  import { COMPLETED_COPY_BUTTON_SVG, COPY_BUTTON_SVG, EXCLUDED_LANGUAGES } from "./vars";
 
  class EditorJsCodeFlask {
    /**
@@ -92,7 +92,7 @@
      this._preserveBlank = config.preserveBlank !== undefined ? config.preserveBlank : false;
 
      this._element; // used to hold the wrapper div, as a point of reference
-
+     this._copySvg = COPY_BUTTON_SVG
 
 
      // let x = (x === undefined) ? your_default_value : x;
@@ -138,12 +138,24 @@
     editorElem.classList.add('editorjs-codeFlask_Editor')
     let langdisplay = document.createElement('div');
     langdisplay.classList.add('editorjs-codeFlask_LangDisplay')
+    let coppyButton = document.createElement('button')
+    coppyButton.classList.add("editorjs-codeFlask_CopyButton");
+    coppyButton.innerHTML = this._copySvg;
 
     langdisplay.innerHTML = this.data.language
-
+    coppyButton.addEventListener("click",async () => {
+      coppyButton.innerHTML = COMPLETED_COPY_BUTTON_SVG;
+      try {
+       await navigator.clipboard.writeText(this.data.editorInstance.code);
+      } finally {
+        setTimeout(()=>{
+           coppyButton.innerHTML = this._copySvg;
+        },1000)
+      }
+    });
     this._element.appendChild(editorElem)
     this._element.appendChild(langdisplay)
-
+    this._element.appendChild(coppyButton);
     this.data.editorInstance = new CodeFlask(editorElem, {
       language: this.data.language,
       lineNumbers : this.data.showlinenumbers,
