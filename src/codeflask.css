@@ -31,9 +31,7 @@
 	z-index: 2;
 	line-height: 20px;
 	background-color: #dcdfe6;
-	padding: 4px;
-	padding-left: 9px;
-	padding-right: 9px;
+	padding:4px 9px;
 	right: 0;
 	top: 0;
 	border: none;
